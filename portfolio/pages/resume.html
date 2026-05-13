@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Kyle Wilson | Kyonic Designs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  .resume-hero{min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 6rem 4rem;position:relative;overflow:hidden}
+  .resume-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(200,164,69,0.06),transparent);pointer-events:none}
+  .resume-hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,8rem);letter-spacing:4px;line-height:.9;margin-bottom:1rem}
+  .resume-hero-title span{color:var(--gold)}
+  .resume-hero-sub{font-size:1.1rem;color:var(--text-mid);font-weight:300;max-width:500px;line-height:1.8}
+  .resume-actions{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap}
+  .resume-body{max-width:960px;margin:0 auto;padding:4rem 2rem}
+  .resume-section{margin-bottom:3.5rem}
+  .resume-section-title{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--gold);padding-bottom:.75rem;border-bottom:1px solid rgba(200,164,69,0.2);margin-bottom:1.75rem;display:flex;align-items:center;gap:.75rem}
+  .resume-section-title::before{content:'';width:8px;height:8px;background:var(--gold);transform:rotate(45deg);flex-shrink:0}
+  .contact-bar{display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;padding:1.5rem 2rem;background:var(--bg-card);border:1px solid var(--border);margin-bottom:3rem}
+  .contact-bar-item{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--text-mid)}
+  .contact-bar-item .icon{width:28px;height:28px;border:1px solid rgba(200,164,69,0.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--gold);flex-shrink:0;transform:rotate(45deg)}
+  .contact-bar-item .icon span{transform:rotate(-45deg);display:inline-block}
+  .contact-bar-item a{color:var(--gold);text-decoration:none;transition:color .3s}
+  .contact-bar-item a:hover{color:var(--gold-light)}
+  .contact-bar-sep{width:1px;height:20px;background:var(--border)}
+  .edu-degree{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.25rem}
+  .edu-school{font-size:.9rem;color:var(--text-dim)}
+  .skills-cloud{display:flex;flex-wrap:wrap;gap:.6rem}
+  .skill-pill{padding:.5rem 1.2rem;border:1px solid var(--border);font-size:.8rem;color:var(--text-mid);font-weight:500;transition:all .3s;position:relative;overflow:hidden}
+  .skill-pill::before{content:'';position:absolute;inset:0;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:-1}
+  .skill-pill:hover{color:var(--bg);border-color:var(--gold)}.skill-pill:hover::before{transform:scaleX(1)}
+  .skill-pill.primary{border-color:rgba(200,164,69,0.3);color:var(--gold);font-weight:600}
+  .resume-project{padding:1.75rem 2rem;border:1px solid var(--border);background:var(--bg-card);margin-bottom:1.25rem;transition:all .4s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
+  .resume-project::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);transform:scaleY(0);transform-origin:top;transition:transform .4s cubic-bezier(.16,1,.3,1)}
+  .resume-project:hover{border-color:var(--border-gold);transform:translateX(4px)}.resume-project:hover::before{transform:scaleY(1)}
+  .project-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
+  .project-title-text{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700}
+  .project-tools{font-size:.7rem;color:var(--gold-dim);letter-spacing:1px;text-transform:uppercase;font-weight:600;white-space:nowrap}
+  .project-bullets{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+  .project-bullets li{font-size:.88rem;color:var(--text-mid);font-weight:300;line-height:1.6;padding-left:1rem;position:relative}
+  .project-bullets li::before{content:'◇';position:absolute;left:0;color:var(--gold-dim);font-size:.5rem;top:.4rem}
+  .exp-block{padding:1.75rem 2rem;border:1px solid var(--border);background:var(--bg-card)}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.25rem}
+  .exp-role{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700}
+  .exp-date{font-size:.75rem;color:var(--gold-dim);letter-spacing:1px;text-transform:uppercase;font-weight:600}
+  .exp-company{font-size:.9rem;color:var(--text-dim);margin-bottom:.75rem}
+  .portfolio-links{display:flex;flex-direction:column;gap:1rem}
+  .portfolio-link-row{display:flex;align-items:center;gap:1.5rem;padding:1.25rem 1.75rem;border:1px solid var(--border);background:var(--bg-card);transition:all .4s;text-decoration:none}
+  .portfolio-link-row:hover{border-color:var(--border-gold);transform:translateX(6px);box-shadow:0 10px 40px rgba(0,0,0,0.2)}
+  .link-icon{width:44px;height:44px;border:1.5px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;transform:rotate(45deg);flex-shrink:0;transition:all .3s;font-size:1rem}
+  .link-icon span{transform:rotate(-45deg);display:inline-block}
+  .portfolio-link-row:hover .link-icon{background:var(--gold);border-color:var(--gold)}.portfolio-link-row:hover .link-icon span{color:var(--bg)}
+  .link-info{flex:1}.link-label{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.15rem}
+  .link-url{font-size:.75rem;color:var(--gold);letter-spacing:.5px}
+  .link-arrow{font-size:1.2rem;color:var(--gold-dim);transition:transform .3s,color .3s}
+  .portfolio-link-row:hover .link-arrow{transform:translateX(4px);color:var(--gold)}
+  .print-btn{position:fixed;bottom:2rem;right:2rem;z-index:100;width:50px;height:50px;border:1px solid var(--gold);background:var(--bg);color:var(--gold);font-size:1.2rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;backdrop-filter:blur(10px)}
+  .print-btn:hover{background:var(--gold);color:var(--bg);box-shadow:0 10px 40px rgba(200,164,69,0.2)}
+  @media print{nav,.print-btn,.cursor-glow,.resume-actions{display:none!important}body::after{display:none}.resume-hero{min-height:auto;padding:2rem}.resume-body{padding:1rem}}
+  @media(max-width:768px){.resume-hero{padding:7rem 2rem 3rem}.contact-bar{flex-direction:column;gap:.75rem}.contact-bar-sep{display:none}.project-header,.exp-header{flex-direction:column}}
+</style>
+</head><body>
+<div class="cursor-glow" id="glow"></div>
+<nav id="mainNav"><a href="../index.html" class="logo"><div class="logo-diamond"><span>K</span></div>KYONIC</a><ul class="nav-links"><li><a href="../index.html#work">Work</a></li><li><a href="../index.html#services">Services</a></li><li><a href="../index.html#skills">Skills</a></li><li><a href="../index.html#about">About</a></li><li><a href="../index.html#contact">Contact</a></li><li><a href="resume.html" class="active">Resume</a></li></ul></nav>
+
+<button class="print-btn" onclick="window.print()" title="Print Resume">&#9113;</button>
+
+<section class="resume-hero">
+  <a href="../index.html" class="back-link reveal"><span>←</span> Back to Portfolio</a>
+  <div class="hero-label" style="margin-bottom:.5rem"><span class="text-reveal">Multimedia Designer & Developer</span></div>
+  <h1 class="resume-hero-title reveal">KYLE <span>WILSON</span></h1>
+  <p class="resume-hero-sub reveal">Web developer and production designer. I build websites and put together the design work that goes with them.</p>
+  <div class="resume-actions reveal">
+    <a href="mailto:KyleWilson2402@gmail.com" class="btn btn-filled btn-sm">Email Me</a>
+    <a href="https://www.linkedin.com/in/kyle-wilson-5037b4314" target="_blank" class="btn btn-sm">LinkedIn</a>
+    <a href="https://www.fiverr.com/s/jjzXRaV" target="_blank" class="btn btn-sm">Fiverr</a>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<div class="resume-body">
+  <div class="contact-bar reveal">
+    <div class="contact-bar-item"><div class="icon"><span>&#9993;</span></div><a href="mailto:KyleWilson2402@gmail.com">KyleWilson2402@gmail.com</a></div>
+    <div class="contact-bar-sep"></div>
+    <div class="contact-bar-item"><div class="icon"><span>&#9742;</span></div>(929) 245-7372</div>
+    <div class="contact-bar-sep"></div>
+    <div class="contact-bar-item"><div class="icon"><span>&#9679;</span></div>Merrick, NY</div>
+  </div>
+
+  <div class="resume-section reveal">
+    <div class="resume-section-title">Education</div>
+    <div class="edu-degree">Associate in Science — Multimedia Programming and Design</div>
+    <div class="edu-school">Borough of Manhattan Community College (BMCC)</div>
+  </div>
+
+  <div class="resume-section reveal">
+    <div class="resume-section-title">Technical Skills</div>
+    <div class="skills-cloud">
+      <span class="skill-pill primary">HTML5</span>
+      <span class="skill-pill primary">CSS3</span>
+      <span class="skill-pill primary">Figma</span>
+      <span class="skill-pill">Responsive Design</span>
+      <span class="skill-pill">UI/UX</span>
+      <span class="skill-pill">Wireframing</span>
+      <span class="skill-pill">Storyboarding</span>
+      <span class="skill-pill">Brand Identity</span>
+      <span class="skill-pill">Production Design</span>
+      <span class="skill-pill">Leadership</span>
+      <span class="skill-pill">Communication</span>
+    </div>
+  </div>
+
+  <div class="resume-section reveal">
+    <div class="resume-section-title">Projects</div>
+
+    <div class="resume-project reveal">
+      <div class="project-header"><div class="project-title-text">Mind of Their Own — Promotional Website</div><div class="project-tools">HTML · CSS</div></div>
+      <ul class="project-bullets">
+        <li>Designed and developed a cinematic promotional website for an independent animated short film by Brandasund Peterson.</li>
+        <li>Built layered typography, atmospheric scroll animations, a poster gallery, and team credits section.</li>
+        <li>Took the film's look and feel and built the whole website around it.</li>
+      </ul>
+    </div>
+
+    <div class="resume-project reveal">
+      <div class="project-header"><div class="project-title-text">Manchester United Hub — Multi-Page Fan Website</div><div class="project-tools">HTML · CSS · Flexbox</div></div>
+      <ul class="project-bullets">
+        <li>Built a responsive multipage fan site covering Manchester United's history, legends, trophies, tactics, and personal trip to Old Trafford.</li>
+        <li>Designed a custom stats bar, trophy cabinet grid, legend profiles with real photography, and smooth scroll navigation.</li>
+        <li>Implemented dark theme with United red accents, hamburger mobile navigation, and smooth scroll animations.</li>
+      </ul>
+    </div>
+
+    <div class="resume-project reveal">
+      <div class="project-header"><div class="project-title-text">Wilson Coffee Beans — UI/UX Wireframe & Prototype</div><div class="project-tools">Figma</div></div>
+      <ul class="project-bullets">
+        <li>Designed a complete mobile ecommerce user flow: homepage, product detail, checkout, and order confirmation.</li>
+        <li>Created clickable prototypes to test usability and mapped out the full user journey before development.</li>
+      </ul>
+    </div>
+
+    <div class="resume-project reveal">
+      <div class="project-header"><div class="project-title-text">Brand & Production Templates</div><div class="project-tools">Figma</div></div>
+      <ul class="project-bullets">
+        <li>Created brand guideline documents, social media template kits, pitch decks, and media kits.</li>
+        <li>Built reusable templates to keep the visual identity consistent across different formats.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="resume-section reveal">
+    <div class="resume-section-title">Experience</div>
+    <div class="exp-block">
+      <div class="exp-header"><div class="exp-role">Shift Leader</div><div class="exp-date">September 2024 — Present</div></div>
+      <div class="exp-company">Jersey Mike's — Merrick, NY</div>
+      <ul class="project-bullets">
+        <li>Supervise team members and maintain efficient workflow in a fast-paced environment.</li>
+        <li>Deliver strong customer service while managing multiple responsibilities simultaneously.</li>
+        <li>Develop leadership, time management, and communication skills applicable to team-based creative work.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="resume-section reveal">
+    <div class="resume-section-title">Portfolio</div>
+    <div class="portfolio-links">
+      <a href="https://www.figma.com/proto/re3b4b3CdL66lY1eZjHSGr/Wilson-Coffee-Beans-V1" target="_blank" class="portfolio-link-row"><div class="link-icon"><span>&#9670;</span></div><div class="link-info"><div class="link-label">Figma Prototype — Wilson Coffee Beans V1</div><div class="link-url">figma.com/proto/re3b4b3CdL66lY1eZjHSGr</div></div><div class="link-arrow">→</div></a>
+      <a href="https://kylewilson2402.github.io/MMP-240/" target="_blank" class="portfolio-link-row"><div class="link-icon"><span>⟨/⟩</span></div><div class="link-info"><div class="link-label">HTML/CSS Projects — MMP 240</div><div class="link-url">kylewilson2402.github.io/MMP-240</div></div><div class="link-arrow">→</div></a>
+      <a href="https://www.linkedin.com/in/kyle-wilson-5037b4314" target="_blank" class="portfolio-link-row"><div class="link-icon"><span>in</span></div><div class="link-info"><div class="link-label">LinkedIn</div><div class="link-url">linkedin.com/in/kyle-wilson-5037b4314</div></div><div class="link-arrow">→</div></a>
+      <a href="https://www.fiverr.com/s/jjzXRaV" target="_blank" class="portfolio-link-row"><div class="link-icon"><span>F</span></div><div class="link-info"><div class="link-label">Fiverr — Kyonic Designs</div><div class="link-url">fiverr.com/s/jjzXRaV</div></div><div class="link-arrow">→</div></a>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<section class="contact-page" style="min-height:auto;padding:5rem 4rem">
+  <div class="section-label reveal">Ready to Work</div>
+  <h2 class="contact-big-text reveal" style="font-size:clamp(2rem,6vw,5rem)">LET'S <span>BUILD</span></h2>
+  <p class="contact-sub reveal">Looking for an internship, freelance project, or collaboration — I'm ready.</p>
+  <div class="contact-btns reveal"><a href="mailto:KyleWilson2402@gmail.com" class="btn btn-filled">Email Me</a><a href="../index.html#work" class="btn">View My Work</a></div>
+</section>
+<footer><a href="../index.html" class="logo" style="font-size:.85rem"><div class="logo-diamond" style="width:22px;height:22px;font-size:.55rem"><span>K</span></div>KYONIC</a><span>&copy; 2026 Kyle Wilson — Kyonic Designs.</span></footer>
+<script>const glow=document.getElementById('glow');let mx=0,my=0;document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});(function u(){glow.style.left=mx+'px';glow.style.top=my+'px';requestAnimationFrame(u)})();const nav=document.getElementById('mainNav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));</script>
+</body></html>
