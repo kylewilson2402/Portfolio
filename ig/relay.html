@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Kyonic relay</title></head>
+<body style="background:#07080C;color:#E8F1FF;font:14px monospace;padding:30px">Kyonic upload relay. Ready.<pre id="log"></pre>
+<script>
+var IG=/^https:\/\/(www\.)?instagram\.com$/;
+function log(t){document.getElementById('log').textContent+=t+"\n";}
+window.addEventListener('message', async function(e){
+  if(!IG.test(e.origin)||!e.data||e.data.type!=='kyget')return;
+  var out=[];
+  for(var i=0;i<e.data.files.length;i++){var f=e.data.files[i];var r=await fetch(f,{cache:'no-store'});var b=await r.arrayBuffer();out.push({name:f.split('/').pop(),buf:b});}
+  log('sent '+out.length+' file(s) for '+e.data.id);
+  e.source.postMessage({type:'kyfiles',id:e.data.id,files:out},e.origin,out.map(function(o){return o.buf;}));
+});
+if(window.opener){try{window.opener.postMessage({type:'kyready'},'*');}catch(x){}}
+</script></body></html>
