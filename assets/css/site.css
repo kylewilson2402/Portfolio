@@ -179,7 +179,7 @@ section { position: relative; }
 .nav-links a[aria-current="page"]::before, .nav-links a[aria-current="page"]::after { opacity: 1; }
 .menu-btn { display: none; background: none; border: 2px solid var(--paper); padding: 9px 12px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; cursor: pointer; }
 
-@media (max-width: 1020px) { .nav-mid .tc { display: none; } }
+@media (max-width: 1180px) { .nav-mid { display: none; } }
 @media (max-width: 860px) {
   .nav-mid { display: none; }
   .menu-btn { display: inline-flex; }
