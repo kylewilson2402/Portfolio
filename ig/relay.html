@@ -1,14 +1,19 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Kyonic relay</title></head>
-<body style="background:#07080C;color:#E8F1FF;font:14px monospace;padding:30px">Kyonic upload relay. Ready.<pre id="log"></pre>
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Kyonic relay</title>
+<style>body{background:#07080C;color:#E8F1FF;font:14px monospace;padding:20px;margin:0}textarea{width:100%;height:60vh;background:#0d0f17;color:#9ab;border:2px solid #2B3BFF;font:10px monospace}</style></head>
+<body><div id="st">Kyonic upload relay</div><textarea id="t" spellcheck="false"></textarea>
 <script>
-var IG=/^https:\/\/(www\.)?instagram\.com$/;
-function log(t){document.getElementById('log').textContent+=t+"\n";}
-window.addEventListener('message', async function(e){
-  if(!IG.test(e.origin)||!e.data||e.data.type!=='kyget')return;
-  var out=[];
-  for(var i=0;i<e.data.files.length;i++){var f=e.data.files[i];var r=await fetch(f,{cache:'no-store'});var b=await r.arrayBuffer();out.push({name:f.split('/').pop(),buf:b});}
-  log('sent '+out.length+' file(s) for '+e.data.id);
-  e.source.postMessage({type:'kyfiles',id:e.data.id,files:out},e.origin,out.map(function(o){return o.buf;}));
-});
-if(window.opener){try{window.opener.postMessage({type:'kyready'},'*');}catch(x){}}
+(async function(){
+  var q=new URLSearchParams(location.search), post=q.get('post');
+  if(!post){document.getElementById('st').textContent='No post given';return;}
+  var man=await (await fetch('manifest.json',{cache:'no-store'})).json();
+  var list=man[post], out=[];
+  for(var i=0;i<list.length;i++){
+    var b=await (await fetch(list[i],{cache:'no-store'})).blob();
+    var s=await new Promise(function(r){var fr=new FileReader();fr.onload=function(){r(fr.result.split(',')[1]);};fr.readAsDataURL(b);});
+    out.push({name:list[i].split('/').pop(),b64:s});
+  }
+  var t=document.getElementById('t'); t.value='KYPOST'+JSON.stringify({post:post,files:out});
+  document.getElementById('st').textContent='READY '+post+' '+out.length+' files '+t.value.length+' chars';
+  t.addEventListener('focus',function(){t.select();});
+})();
 </script></body></html>
