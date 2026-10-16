@@ -626,3 +626,12 @@ html.no-intro .intro { display: none; }
 }
 
 .fb-hint.inline { position: static; transform: none; width: 44px; height: 40px; }
+
+/* Posters and single artworks: always fit the whole piece on screen */
+.shot.poster .shot-frame { display: flex; justify-content: center; align-items: center; padding: clamp(12px, 2vw, 28px); background: var(--ink-3); }
+.shot.poster .shot-frame img { width: auto; max-width: 100%; max-height: calc(100vh - 170px); max-height: calc(100svh - 170px); }
+.shot.poster .shot-frame:hover img { transform: none; }
+.tile.fit .tile-media { background: #000; }
+.tile.fit .tile-media img { object-fit: contain; }
+.tile.fit:hover .tile-media img { transform: scale(1.015); }
+.tile.fit .tile-media .layer { background-size: contain; background-repeat: no-repeat; }
