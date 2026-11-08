@@ -177,7 +177,7 @@
   if (frames.length) {
     var lb = document.createElement("div");
     lb.className = "lb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true"); lb.setAttribute("aria-label", "Image viewer");
-    lb.innerHTML = '<div class="lb-top"><span class="lb-cap"></span><button type="button" data-x>Close ✕</button></div><div class="lb-img"><img alt=""></div><div class="lb-bot"><button type="button" data-p>← Prev</button><span class="lb-n mono" style="align-self:center;font-size:12px;color:var(--paper-dim)"></span><button type="button" data-n>Next →</button></div>';
+    lb.innerHTML = '<div class="lb-top"><span class="lb-cap"></span><button type="button" data-x>Close ✕</button></div><div class="lb-img"><img alt=""></div><div class="lb-bot"><button type="button" data-p>← Prev</button><span class="lb-n mono" style="align-self:center;font-size:12px;color:var(--paper-dim)"></span><button type="button" data-z aria-pressed="false">Zoom +</button><button type="button" data-n>Next →</button></div>';
     document.body.appendChild(lb);
     var lbImg = lb.querySelector("img"), cap = lb.querySelector(".lb-cap"), num = lb.querySelector(".lb-n"), cur = 0, group = [], lastFocus;
     function show(i) {
@@ -186,7 +186,15 @@
       lbImg.src = f.getAttribute("data-full") || im.currentSrc || im.src;
       lbImg.alt = im.alt; cap.textContent = f.getAttribute("data-cap") || im.alt;
       num.textContent = (cur + 1) + " / " + group.length;
+      zoom(false);
     }
+    var zBtn = lb.querySelector("[data-z]"), zBox = lb.querySelector(".lb-img");
+    function zoom(on) {
+      lb.classList.toggle("is-zoom", on); zBtn.textContent = on ? "Fit −" : "Zoom +"; zBtn.setAttribute("aria-pressed", on ? "true" : "false");
+      zBox.scrollTop = 0; zBox.scrollLeft = 0;
+    }
+    zBtn.addEventListener("click", function () { zoom(!lb.classList.contains("is-zoom")); });
+    lbImg.addEventListener("click", function () { zoom(!lb.classList.contains("is-zoom")); });
     function open(f) {
       var g = f.getAttribute("data-lb");
       group = frames.filter(function (x) { return x.getAttribute("data-lb") === g; });

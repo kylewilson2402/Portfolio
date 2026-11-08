@@ -635,3 +635,11 @@ html.no-intro .intro { display: none; }
 .tile.fit .tile-media img { object-fit: contain; }
 .tile.fit:hover .tile-media img { transform: scale(1.015); }
 .tile.fit .tile-media .layer { background-size: contain; background-repeat: no-repeat; }
+/* Lightbox: tall images (rate cards, posters) fit the screen instead of overflowing */
+.lb { grid-template-rows: auto minmax(0, 1fr) auto; height: 100vh; height: 100dvh; }
+.lb-img { height: 100%; overflow: hidden; }
+.lb-img { display: flex; align-items: center; justify-content: center; }
+.lb-img img { width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 170px); max-height: calc(100dvh - 170px); }
+.lb-img img { cursor: zoom-in; }
+.lb.is-zoom .lb-img { display: block; overflow: auto; -webkit-overflow-scrolling: touch; }
+.lb.is-zoom .lb-img img { max-width: none; max-height: none; width: min(1440px, max(100%, 900px)); margin: 0 auto; cursor: zoom-out; }
